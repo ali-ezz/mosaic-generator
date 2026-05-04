@@ -1,101 +1,79 @@
 # Mosaic Generator
 
-A Python tool that creates mosaics from images or videos using small images or videos as tiles.
+![License](https://img.shields.io/badge/license-MIT-green)
+![Status](https://img.shields.io/badge/status-experimental-orange)
+![Language](https://img.shields.io/badge/language-Python-blue)
+
+Mosaic Generator is an interactive Python CLI for generating image and video mosaics from local media.
 
 ## Features
 
-- **Image Mosaic**: Rebuild an image using small images as tiles
-- **Video Mosaic**: Rebuild a video using small videos as tiles
-- Color-based matching algorithm for optimal tile selection
-- Support for various image and video formats
-- Customizable tile sizes
+- Generate image mosaics from photographs
+- Generate video mosaics from local video files
+- Interactive CLI selects media from `input/`
+- Customizable mosaic density using number of copies
+- Works with standard image and video file formats
 
-## Project Structure
+## Quick Start
 
-```
-mosaic_project/
-│
-├── main.py            # Main script
-├── requirements.txt   # Python dependencies
-├── tiles_images/      # Folder with tiny images
-├── tiles_videos/      # Folder with tiny videos
-├── input/
-│   ├── image.jpg      # Main image (optional)
-│   ├── video.mp4      # Main video (optional)
-├── output/            # Output folder for mosaics
-```
-
-## Installation
-
-1. Install the required dependencies:
+1. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
-
-## Usage
-
-### Image Mosaic
-
-To create an image mosaic:
+2. Place one or more image/video files in `input/`.
+3. Run the CLI:
 ```bash
-python main.py --mode image --main input/image.jpg --tiles tiles_images --output output/mosaic.jpg
+python main.py
+```
+4. Enter the number of copies or choose the default, then provide an output path.
+
+## Usage examples
+
+- Create a mosaic from an image in `input/` and save to `output/result.jpg`:
+```bash
+python main.py
 ```
 
-### Video Mosaic
-
-To create a video mosaic:
+- Create a mosaic from a video in `input/` and save to `output/result.mp4`:
 ```bash
-python main.py --mode video --main input/video.mp4 --tiles tiles_videos --output output/mosaic.mp4
+python main.py
 ```
 
-### Custom Tile Size
+The script will list detected files from `input/` and prompt you to choose one.
 
-You can specify a custom tile size (width height):
-```bash
-python main.py --mode image --main input/image.jpg --tiles tiles_images --output output/mosaic.jpg --tile_size 64 64
+## Project layout
+
+```
+.
+├── main.py
+├── README.md
+├── requirements.txt
+├── LICENSE
+├── CONTRIBUTING.md
+├── CODE_OF_CONDUCT.md
+├── SECURITY.md
+├── CODEOWNERS
+├── CHANGELOG.md
+├── .github/
+│   ├── ISSUE_TEMPLATE/
+│   │   ├── bug_report.md
+│   │   └── feature_request.md
+│   └── PULL_REQUEST_TEMPLATE.md
+├── input/          # Place source images or videos here
+└── output/         # Generated mosaics are written here
 ```
 
-## How It Works
+## Contributing
 
-### Image Mosaic Process
+See `CONTRIBUTING.md` for contribution guidelines and branch naming.
 
-1. Load the main image
-2. Divide it into a grid based on tile size
-3. Load all tile images and resize them to tile size
-4. Calculate the average color of each grid cell and each tile image
-5. For each grid cell, find the tile with the closest matching average color
-6. Place the selected tiles in a new image to create the mosaic
-7. Save the final mosaic image
+## License and policies
 
-### Video Mosaic Process
+- License: `MIT`
+- Code of conduct: `CODE_OF_CONDUCT.md`
+- Security policy: `SECURITY.md`
 
-1. Load the main video frame by frame
-2. Divide each frame into a grid based on tile size
-3. Analyze all tile videos to calculate their average colors
-4. For each grid cell in each frame, find the tile video with the closest matching average color
-5. Create a new video by combining the selected tile videos in a grid
-6. Save the final mosaic video
+## Notes
 
-## Tips for Best Results
-
-### Image Mosaics
-- Use tile images with varied colors and patterns
-- Ensure tile images are roughly the same aspect ratio as your desired tile size
-- Higher resolution main images will produce better results with more tiles
-
-### Video Mosaics
-- Use tile videos that are the same length as your main video (or can be looped)
-- Ensure tile videos have consistent visual content
-- All tile videos should be in the same format for best compatibility
-
-## Dependencies
-
-- **OpenCV**: Image and video processing
-- **NumPy**: Mathematical operations and array handling
-- **MoviePy**: Video editing and processing
-- **Pillow**: Image processing
-- **tqdm**: Progress bars for long operations
-
-## License
-
-This project is open source and available under the MIT License.
+- `input/` should contain your source `.jpg`, `.png`, `.mp4`, `.mov`, or `.avi` files.
+- The output file can be any valid image or video extension supported by OpenCV.
